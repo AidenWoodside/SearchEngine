@@ -1,12 +1,31 @@
 
 //Will be the main class for the document
-//what the hell is the problem
+//This main class will be used to iterate through
+//the user interaction. Takes user input in loop
+
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
 
-        int a = 0;
+        Engine en = new Engine();
+
+        //construct the index file and file readedr
+        File file = new File("titles.txt");
+        Scanner sc = new Scanner(file);
+
+        //iterate through the text file
+        String line = "";
+        while(sc.hasNextLine())
+        {
+            line = sc.nextLine();
+
+            System.out.println(line);
+        }
+
         
     }
 }
