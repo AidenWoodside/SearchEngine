@@ -1,5 +1,5 @@
-//update
 
+//Will be the main class for the document
 
 public class Main {
 
