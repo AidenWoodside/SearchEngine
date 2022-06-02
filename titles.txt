@@ -1,0 +1,10 @@
+This file will
+be used for 
+the indexing of different
+web pages
+this will be used 
+to iterate through
+and determine the correctness
+of our total
+search engine
+capabilities
