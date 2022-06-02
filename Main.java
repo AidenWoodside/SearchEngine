@@ -6,9 +6,6 @@ public class Main {
 
     public static void main(String[] args){
 
-        String a = "my mother is a wonderful woman";
-
-
-        System.out.print(a);
+        
     }
 }
