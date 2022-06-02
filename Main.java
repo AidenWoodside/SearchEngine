@@ -8,9 +8,6 @@ public class Main {
 
         String a = "yolo";
 
-        System.out.println("Hello");
-
-        System.out.println("You are my dad");
 
         System.out.print(a);
     }
