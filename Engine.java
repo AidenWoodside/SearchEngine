@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
 
 public class Engine {
 	
-ArrayList<String> txt = new ArrayList<String>();
-
-//when object created, initialize index list
-//find text file, initialize data structure to hold
-//all of the elements of the text file
+	ArrayList<String> txt = new ArrayList<String>();
+	
+	//when object created, initialize index list
+	//find text file, initialize data structure to hold
+	//all of the elements of the text file
     public Engine() throws FileNotFoundException
     {
     	 File file = new File("titles.txt");
