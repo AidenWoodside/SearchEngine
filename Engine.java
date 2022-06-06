@@ -96,9 +96,9 @@ public class Engine {
             	max = t.freq;
             	if(max >= 1)
             	{
-            		if(!temptop.isEmpty())
+            		if(!temptop.isEmpty() && temptop.size()>=3)
             		{
-                		for(int i = 0; i < temptop.size() && i < 3; i++)
+                		for(int i = 0; i < 3; i++)
                 		{
                 			if(temptop.get(i).freq < t.freq)
                 			{
