@@ -14,7 +14,7 @@ public class Main {
     	
     	//declare engine object
         Engine en = new Engine();
-
+        
         //empty string that will hold user input
         String input = "";
         
@@ -23,12 +23,12 @@ public class Main {
         
         //first prompt to user
         System.out.println("Hello, what would you like to search for: \n");
-        input = sc.next();
+        input = sc.nextLine();
         
         //declare empty array that will hold the three
         //most relevant results based on search
-        String[] output = new String[3];
-        
+        String[] output = null;
+
         
         //Start the user input loop
         while(!input.equals("-1"))
@@ -37,9 +37,18 @@ public class Main {
         	output = en.getSearch(input);
         	
         	//print the responses
-        	System.out.println("The most relevant responses are:");
-        	for(String x:output)
-        		System.out.println("\t"+ x);
+        	if(output != null)
+        	{
+            	System.out.println("The most relevant responses are:");
+            	for(String x:output)
+            		System.out.println("\t"+ x);
+//            	System.out.println("The most relevant response was: \n" + en.getSearch(input));
+        	}
+        	else
+        	{
+        		System.out.println("No valid Respnses");
+        	}
+
         	
         	//prompt user for another search query 
             System.out.println("\nwhat would you like to search for (type -1 to exit): \n");
