@@ -27,14 +27,14 @@ public class Main {
         
         //declare empty array that will hold the three
         //most relevant results based on search
-        String[] output = null;
+        
 
         
         //Start the user input loop
         while(!input.equals("-1"))
         {
         	//search for user input
-        	output = en.getSearch(input);
+        	String[] output = en.getSearch(input);
         	
         	//print the responses
         	if(output != null)
@@ -42,7 +42,6 @@ public class Main {
             	System.out.println("The most relevant responses are:");
             	for(String x:output)
             		System.out.println("\t"+ x);
-//            	System.out.println("The most relevant response was: \n" + en.getSearch(input));
         	}
         	else
         	{
@@ -52,7 +51,7 @@ public class Main {
         	
         	//prompt user for another search query 
             System.out.println("\nwhat would you like to search for (type -1 to exit): \n");
-            input = sc.next();
+            input = sc.nextLine();
         }
         
         System.out.println("System Closing...");
