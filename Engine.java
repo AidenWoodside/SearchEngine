@@ -48,6 +48,9 @@ public class Engine {
     	sort(library);
     }
     
+    //takes the amount of results that the user wants
+    //and returns an array with the correct amount of 
+    //books that are relevant in descending order
     public String[] getResults(int totalResults)
     {
     	String[] output = new String[totalResults];
