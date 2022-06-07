@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +9,7 @@ import java.io.FileNotFoundException;
 public class Engine {
 	
 	//Initialize library to hold all of the books
-	private ArrayList<Book> library = new ArrayList<Book>();
+	private LinkedList<Book> library = new LinkedList<Book>();
 	
     public Engine() throws FileNotFoundException
     {
@@ -119,7 +117,7 @@ public class Engine {
     }
 
 
-    public static void sort(ArrayList<Book> list) 
+    public static void sort(LinkedList<Book> list) 
     {
         list.sort((o1, o2) -> Integer.compare(o2.getRelevance(), o1.getRelevance()));
     }
