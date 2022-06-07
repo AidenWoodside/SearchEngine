@@ -17,25 +17,45 @@ public class Main {
         
         //empty string that will hold user input
         String input = "";
+        int results = 0;
         
         //declare the scanner to read user input
         Scanner sc = new Scanner(System.in);
         
-        //first prompt to user
-        System.out.println("Hello, what would you like to search for: \n");
-        input = sc.nextLine();
-        
-        //declare empty array that will hold the three
-        //most relevant results based on search
-        
-
-        
         //Start the user input loop
-        while(!input.equals("-1"))
+        do
         {
-        	//search for user input
-        	String[] output = en.getResults(input);
-        	
+            //first prompt to user
+            System.out.println("Hello, what would you like to search for(-1 to exit): \n");
+            input = sc.nextLine();
+            
+            //sort the library for most relevant results
+            en.setResults(input);
+            
+            //validate input for the amount of results to show from user input
+            boolean valid = false;
+            while(!valid)
+            {
+            	try
+            	{
+                    System.out.println("How many relevant results would you like?: \n");
+                    results = Integer.parseInt(sc.nextLine());
+                    
+                    if(results < 1)
+                    	throw new Exception();
+                    
+                    valid = true;
+            	}
+            	catch(Exception e)
+            	{
+            		System.out.println("Please input a valid Integer > 0");
+            	}
+
+            }
+            
+            
+            //get the amount of results requested by user
+        	String[] output = en.getResults(results);
         	//print the responses
         	if(output != null)
         	{
@@ -48,11 +68,7 @@ public class Main {
         		System.out.println("No valid Respnses");
         	}
 
-        	
-        	//prompt user for another search query 
-            System.out.println("\nwhat would you like to search for (type -1 to exit): \n");
-            input = sc.nextLine();
-        }
+        }while(!input.equals("-1"));
         
         System.out.println("System Closing...");
     }

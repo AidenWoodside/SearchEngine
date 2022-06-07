@@ -38,7 +38,7 @@ public class Engine {
     
     //Method responsible for searching data structure for
     //most relevant results based on input 'i'
-    public String[] getResults(String input)
+    public void setResults(String input)
     {
     	//set the relevance for every book in the library according
     	//to the user's search input
@@ -46,11 +46,16 @@ public class Engine {
     	
     	//sort whole library based on relevance
     	sort(library);
+    }
+    
+    public String[] getResults(int totalResults)
+    {
+    	String[] output = new String[totalResults];
+    	for(int i = 0; i < totalResults; i++)
+    	{
+    		output[i] = library.get(i).getTitle();
+    	}
     	
-    	//format output
-    	String[] output = {library.get(0).getTitle(), library.get(1).getTitle(), library.get(2).getTitle()};
-        
-        //return formatted results
     	return output;
     }
     
