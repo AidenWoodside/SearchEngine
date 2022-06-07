@@ -10,41 +10,54 @@ import java.io.FileNotFoundException;
 
 public class Engine {
 	
-	ArrayList<String> txt = new ArrayList<String>();
-	ArrayList<String> normalized = new ArrayList<String>();
+	//Initialize library to hold all of the books
+	private ArrayList<Book> library = new ArrayList<Book>();
 	
-	//when object created, initialize index list
-	//find text file, initialize data structure to hold
-	//all of the elements of the text file
     public Engine() throws FileNotFoundException
     {
-    	 File file = new File("titles.txt");
-         Scanner sc = new Scanner(file);
-
-         //iterate through the text file
-         String line = "";
-         while(sc.hasNextLine())
-         {
-             line = sc.nextLine();
-             normalized.add(line.toLowerCase());
-             txt.add(line);
-         }
+    	//initialize the text file to be read
+		File file = new File("titles.txt");
+		
+		//initialize scanner to iterate through text
+		//file
+		Scanner sc = new Scanner(file);
+		
+		//iterate through the text file
+		String line = "";
+		while(sc.hasNextLine())
+		{
+		    line = sc.nextLine();
+		    
+		    //create new book object
+		    Book book = new Book(line, 0);
+		    
+		    //add new object to library
+		    library.add(book);
+		}
     }
     
     //Method responsible for searching data structure for
     //most relevant results based on input 'i'
-    public String[] getSearch(String input)
+    public String[] getResults(String input)
     {
+    	//set the relevance for every book in the library according
+    	//to the user's search input
+    	setRelevance(input);
     	
-    	input = input.toLowerCase();
-    	String[] str = input.split(" ", 20);
+    	//sort whole library based on relevance
+    	sort(library);
+    	
+    	//format output
+    	String[] output = {library.get(0).getTitle(), library.get(1).getTitle(), library.get(2).getTitle()};
+        
+        //return formatted results
+    	return output;
+    }
+    
 
-    		
-    	HashMap<String, Double> hm = new HashMap<String, Double>();
-    	
-    	//fill hashmap with titles
-    	for(String x : txt)
-    		hm.put(x, 0.0);
+	private void setRelevance(String input)
+    {
+    	String[] str = input.toLowerCase().split(" ", 20);
     	
     	//this hash set contains many prepositions and articles that
     	//will be valued less when checking for relevance in titles
@@ -52,111 +65,83 @@ public class Engine {
     	
     	//iterate through all of the titles
     	//check the first index of input
-    	for(int i = 0; i < normalized.size(); i++)
+    	for(int i = 0; i < library.size(); i++)
     	{
-    		double count = 0;
-    		String[] split_title = normalized.get(i).split(" ", 50);
+    		//initialize the relevancy value that a book will have
+    		//with the user's search input
+    		int relevance = 0;
+    		
+    		//get title to check for relevance and normalize it to lowercase
+    		//to check against the input which has also bee normalized
+    		String title = library.get(i).getTitle().toLowerCase();
+    		
+    		//split title into array so it is easier to check for the relevance
+    		String[] split_title = title.split(" ", 50);
+    		
+    		//iterate through the input array to check individual strings of 
+    		//the input to all of the titles in the library
     		for(int j = 0; j < str.length; j++)
     		{
+    			
+    			//initialize temporary string that will hold the value of the
+    			//input string currently being checked against book title
     			String temp = str[j];
+    			
+    			//iterate through every individual word within the title and
+    			//check to see if the current input value is within the title
     			for(int k = 0; k < split_title.length; k++)
     			{
+    				
+    				//this checks to see if the input value is an article or
+    				//a preposition and assigns a lower relevancy value if true
     				if(set.contains(temp) && temp.equals(split_title[k]))
     				{
-    					count += .1;
+    					relevance += 1;
     				}
     				else if(temp.equals(split_title[k]))
     				{
-    					count++;
+    					relevance+=10;
     				}
     			}
     		}
-    		hm.put(txt.get(i), count);
+    		
+    		//set the relevance of the book
+    		library.get(i).setRelevance(relevance);
     	}
-
-    	
-    	
-    	double max = -1;
-    	String title= "";
-
-    	
-    	LinkedList<Title> temptop = new LinkedList<Title>();
-    	
-    	//print the hashmap
-        for (Map.Entry mapElement : hm.entrySet()) {
-            String key = (String)mapElement.getKey();
- 
-            // Adding some bonus marks to all the students
-            double value = (double) (mapElement.getValue());
-            
-            Title t = new Title(key, value);
-            
-            if(t.freq >=max)
-            {
-            	max = t.freq;
-            	if(max >= 1)
-            	{
-            		if(!temptop.isEmpty() && temptop.size()>=3)
-            		{
-                		for(int i = 0; i < 3; i++)
-                		{
-                			if(temptop.get(i).freq < t.freq)
-                			{
-                				temptop.add(i, t);
-                				break;
-                			}
-                			else if(temptop.get(i).freq == t.freq)
-                			{
-                				temptop.add(i+1, t);
-                			}
-                		}
-                		if(temptop.size() > 3)
-                		{
-                			temptop.removeLast();
-                		}
-            		}
-            		else
-            		{
-            			temptop.add(t);
-            		}
-            	}
-            }        			
-        }
-        
-        String[] output = null; 
-        
-        if(temptop.size() >= 3)
-        {
-        	String[] tempoutput = {temptop.get(0).title, temptop.get(1).title, temptop.get(2).title};
-        	output = tempoutput;
-        }
-        else if(temptop.size() == 2)
-        {
-        	String[] tempout = {temptop.get(0).title, temptop.get(1).title};
-        	output = tempout;
-        }
-        else if(temptop.size() == 1)
-        {
-        	String[] tempout = {temptop.get(0).title};
-        	output = tempout;
-        }
-        
-        
-    	return output;
     }
-    
+
+
+    public static void sort(ArrayList<Book> list) 
+    {
+        list.sort((o1, o2) -> Integer.compare(o2.getRelevance(), o1.getRelevance()));
+    }
+
 }
 
 
-
-
-class Title
+class Book
 {
-	public String title;
-	public Double freq;
+	private String title;
+	private int relevance;
 	
-	public Title(String title, double freq) {
+	public Book(String title, int relevance) {
+		super();
 		this.title = title;
-		this.freq = freq;
+		this.relevance = relevance;
+	}
+	
+	public String getTitle()
+	{
+		return this.title;
+	}
+	
+	public int getRelevance()
+	{
+		return this.relevance;
+	}
+	
+	public void setRelevance(int i)
+	{
+		this.relevance = i;
 	}
 }

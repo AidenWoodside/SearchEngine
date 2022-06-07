@@ -34,7 +34,7 @@ public class Main {
         while(!input.equals("-1"))
         {
         	//search for user input
-        	String[] output = en.getSearch(input);
+        	String[] output = en.getResults(input);
         	
         	//print the responses
         	if(output != null)
