@@ -8,13 +8,13 @@ import java.io.FileNotFoundException;
 
 public class Engine {
 	
-	//Initialize library to hold all of the books
+	//Initialize library to hold all of the websites
 	private LinkedList<Website> library = new LinkedList<Website>();
 	
     public Engine() throws FileNotFoundException
     {
     	//initialize the text file to be read
-		File file = new File("titles.txt");
+		File file = new File("Websites List.txt");
 		
 		//initialize scanner to iterate through text
 		//file
@@ -28,10 +28,10 @@ public class Engine {
 		    url = sc.nextLine();
 		    description = sc.nextLine();
 		    //create new book object
-		    Website book = new Website(url, 0, description);
+		    Website website = new Website(url, 0, description);
 		    
 		    //add new object to library
-		    library.add(book);
+		    library.add(website);
 		}
     }
     
@@ -55,10 +55,29 @@ public class Engine {
     	String[] output = new String[totalResults];
     	for(int i = 0; i < totalResults; i++)
     	{
-    		output[i] = library.get(i).getUrl();
+    		if(library.get(i).getRelevance() >= 10)
+    			output[i] = library.get(i).getUrl();
     	}
     	
-    	return output;
+    	//check to see if there are any empty elements
+    	int count = 0;
+    	for(int i = 0; i < output.length; i++)
+    	{
+    		if(output[i] != null)
+    			count++;
+    		else
+    			break;
+    	}
+    	
+    	//create output with no null values
+    	String[] validOut = new String[count];
+    	for(int i = 0; i < count; i++)
+    	{
+    		validOut[i] = output[i];
+    	}
+    	
+    	//return the valid responses
+    	return validOut;
     }
     
 

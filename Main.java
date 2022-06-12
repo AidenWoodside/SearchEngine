@@ -59,9 +59,18 @@ public class Main {
         	//print the responses
         	if(output != null)
         	{
+        		if(output.length < results)
+        		{
+        			System.out.println("There were only " + output.length + " relevant results.");
+        		}
+        		
+        	
             	System.out.println("The most relevant responses are:");
             	for(String x:output)
-            		System.out.println("\t"+ x);
+            		if(x != null)
+            			System.out.println("\t"+ x);
+            	
+            	System.out.println();
         	}
         	else
         	{
