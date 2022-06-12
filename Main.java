@@ -61,7 +61,8 @@ public class Main {
         	{
         		if(output.length < results)
         		{
-        			System.out.println("There were only " + output.length + " relevant results.");
+        			System.out.println("\nThere were only " + output.length + " relevant results.");
+        			System.out.println("");
         		}
         		
         	
@@ -69,12 +70,10 @@ public class Main {
             	for(String x:output)
             		if(x != null)
             			System.out.println("\t"+ x);
-            	
-            	System.out.println();
         	}
         	else
         	{
-        		System.out.println("No valid Respnses");
+        		System.out.println("No valid Responses");
         	}
 
         }while(!input.equals("-1"));
