@@ -1,5 +1,7 @@
 https://time.com/6180385/gym-covid-19-risk-tips/
 A New Study Explores Why the Gym Can Be a COVID-19 Spreading Hotspot
+htx:wwt.12344.123
+This is invalid URL syntax
 https://en.wikipedia.org/wiki/France
 France is a developed country with a large economy.
 https://www.amazon.com/
@@ -16,5 +18,7 @@ https://www.foxbusiness.com/politics/republican-desjarlais-biden-student-loan-re
 This is a Fox News article about a bill that is trying to block Biden's student loan relief.
 https://www.nasa.gov/
 This is NASA's home page showing its major endeavors.
+htx:wwt.12344.123
+This is invalid URL syntax
 https://ccrma.stanford.edu/~jos/pasp/Newton_s_Three_Laws_Motion.html#:~:text=Newton%20%27s%20three%20laws%20of%20motion%20may%20be,action%20there%20is%20an%20equal%20and%20opposite%20reaction.
 This is an article about Newton's three laws of motion by Stanford University.
