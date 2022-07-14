@@ -1,10 +1,11 @@
-
 import java.util.ArrayList;
+import java.util.regex.*;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.regex.*;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -12,6 +13,33 @@ public class Engine {
 	
 	//Initialize library to hold all of the websites
 	private LinkedList<Website> library = new LinkedList<Website>();
+	public static boolean isValidURL(String url)
+	{
+		// Regex to check valid URL
+		String regex = "((http|https)://)(www.)?"
+			+ "[a-zA-Z0-9@:%._\\+~#?&//=]"
+			+ "{2,256}\\.[a-z]"
+			+ "{2,6}\\b([-a-zA-Z0-9@:%"
+			+ "._\\+~#?&//=]*)";
+
+		// Compile the ReGex
+		Pattern p = Pattern.compile(regex);
+
+		// If the string is empty
+		// return false
+		if (url == null) {
+			return false;
+		}
+
+		// Find match between given string
+		// and regular expression
+		// using Pattern.matcher()
+		Matcher m = p.matcher(url);
+
+		// Return if the string
+		// matched the ReGex
+		return m.matches();
+	}
 	
     public Engine() throws FileNotFoundException
     {
@@ -28,13 +56,27 @@ public class Engine {
 		while(sc.hasNextLine())
 		{
 		    url = sc.nextLine();
+		    // validate URL name first
+		    if (isValidURL(url) == false)
+		    {
+		    	
+		    	description = sc.nextLine();
+		    	//System.out.println("There is invalid URL in list");
+		    	continue;
+		    }
+		    
 		    description = sc.nextLine();
 		    //create new book object
 		    Website website = new Website(url, 0, description);
 		    
 		    //add new object to library
 		    library.add(website);
+		   // System.out.print(website.getUrl());
+		   // System.out.println(website.getDescription());
 		}
+		
+		
+		
     }
     
     //Method responsible for searching data structure for
@@ -194,4 +236,5 @@ class Website
 	{
 		this.description = description;
 	}
+	
 }
